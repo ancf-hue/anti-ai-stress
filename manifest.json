@@ -1,0 +1,15 @@
+{
+  "short_name": "Анти-Стресс",
+  "name": "Анти-ИИ Стресс",
+  "icons": [
+    {
+      "src": "logo.jpeg",
+      "sizes": "60x60",
+      "type": "image/jpeg"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#0f172a",
+  "background_color": "#0f172a"
+}
