@@ -52,9 +52,21 @@
         .menu-btn .desc { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
         .menu-btn.emergency { background: linear-gradient(135deg, var(--danger), #991b1b); border: none; }
 
-        /* Общие стили экранов */
-        .section-screen { display: none; flex-direction: column; min-height: 100vh; padding: 0; }
-        .section-screen.active { display: flex; }
+        /* Общие стили экранов с плавной анимацией */
+        .section-screen {
+            display: none;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 0;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-out;
+        }
+        .section-screen.active {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
         .screen-header { padding: 16px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); background: var(--bg); position: sticky; top: 0; z-index: 10; }
         .screen-back { width: 40px; height: 40px; border: none; border-radius: 12px; background: var(--surface); color: var(--text); font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .screen-title { font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
@@ -77,12 +89,12 @@
         .copy-btn:active { transform: scale(0.96); background: #059669; }
 
         /* Карточки проектов */
-        .projects-grid { display: grid; gap: 12px; margin-top: 16px; }
+        .projects-grid { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
         .project-card {
             background: var(--surface);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 16px;
-            padding: 16px;
+            padding: 12px 16px;
             text-decoration: none;
             color: var(--text);
             display: flex;
@@ -205,7 +217,7 @@
     </div>
 
     <!-- ЭКРАН ИНСТРУКЦИЯ -->
-    <div class="section-screen hidden" id="instructionScreen">
+    <div class="section-screen" id="instructionScreen">
         <div class="screen-header">
             <button class="screen-back" onclick="showScreen('main')">←</button>
             <div class="screen-title">
@@ -245,7 +257,7 @@
     </div>
 
     <!-- ЭКРАН ПОДДЕРЖКИ -->
-    <div class="section-screen hidden" id="supportScreen">
+    <div class="section-screen" id="supportScreen">
         <div class="screen-header">
             <button class="screen-back" onclick="showScreen('main')">←</button>
             <div class="screen-title">
@@ -304,8 +316,8 @@
         </div>
     </div>
 
-    <!-- ОСТАЛЬНЫЕ ЭКРАНЫ (БЕЗ ИЗМЕНЕНИЙ) -->
-    <div class="section-screen hidden" id="emergencyScreen">
+    <!-- ЭКРАН ЭКСТРЕННЫЙ -->
+    <div class="section-screen" id="emergencyScreen">
         <div class="screen-header">
             <button class="screen-back" onclick="backToMenu()">←</button>
             <div class="screen-title">
@@ -327,7 +339,8 @@
         </div>
     </div>
 
-    <div class="section-screen hidden" id="quickScreen">
+    <!-- ЭКРАН БЫСТРЫЕ ТЕХНИКИ -->
+    <div class="section-screen" id="quickScreen">
         <div class="screen-header">
             <button class="screen-back" onclick="showScreen('main')">←</button>
             <div class="screen-title">
@@ -341,7 +354,8 @@
         </div>
     </div>
 
-    <div class="section-screen hidden" id="breathingScreen">
+    <!-- ЭКРАН ДЫХАНИЕ 4-7-8 -->
+    <div class="section-screen" id="breathingScreen">
         <div class="screen-header">
             <button class="screen-back" onclick="showScreen('quick')">←</button>
             <div class="screen-title">
@@ -361,7 +375,8 @@
         </div>
     </div>
 
-    <div class="section-screen hidden" id="balloonScreen">
+    <!-- ЭКРАН ВОЗДУШНЫЙ ШАР -->
+    <div class="section-screen" id="balloonScreen">
         <div class="screen-header">
             <button class="screen-back" onclick="showScreen('quick')">←</button>
             <div class="screen-title">
@@ -380,7 +395,8 @@
         </div>
     </div>
 
-    <div class="section-screen hidden" id="physicalScreen">
+    <!-- ЭКРАН ФИЗИЧЕСКАЯ РАЗРЯДКА -->
+    <div class="section-screen" id="physicalScreen">
         <div class="screen-header">
             <button class="screen-back" onclick="backToMenu()">←</button>
             <div class="screen-title">
@@ -403,7 +419,8 @@
         </div>
     </div>
 
-    <div class="section-screen hidden" id="diaryScreen">
+    <!-- ЭКРАН ДНЕВНИК -->
+    <div class="section-screen" id="diaryScreen">
         <div class="screen-header">
             <button class="screen-back" onclick="showScreen('main')">←</button>
             <div class="screen-title">
@@ -426,7 +443,8 @@
         </div>
     </div>
 
-    <div class="section-screen hidden" id="statsScreen">
+    <!-- ЭКРАН СТАТИСТИКА -->
+    <div class="section-screen" id="statsScreen">
         <div class="screen-header">
             <button class="screen-back" onclick="showScreen('main')">←</button>
             <div class="screen-title">
@@ -531,9 +549,9 @@
 
     // ========== НАВИГАЦИЯ ==========
     function showScreen(id) {
+        // Скрываем все экраны (без active)
         document.querySelectorAll('.section-screen').forEach(s => {
             s.classList.remove('active');
-            s.classList.add('hidden');
         });
         document.getElementById('menuScreen').classList.add('hidden');
         
@@ -557,7 +575,6 @@
         };
         const targetScreen = document.getElementById(map[id]);
         if (targetScreen) {
-            targetScreen.classList.remove('hidden');
             targetScreen.classList.add('active');
         }
         
