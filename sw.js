@@ -1,19 +1,17 @@
-const CACHE_NAME = 'stress-app-v1';
-const ASSETS = [
-  './',
-  './index.html',
-  './manifest.json',
-  './logo.jpeg'
-];
-
-self.addEventListener('install', (e) => {
-  e.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
-  );
-});
-
-self.addEventListener('fetch', (e) => {
-  e.respondWith(
-    caches.match(e.request).then((res) => res || fetch(e.request))
-  );
-});
+{
+  "name": "Анти-ИИ Стресс",
+  "short_name": "АнтиСтресс",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1a2a3a",
+  "theme_color": "#1a2a3a",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "logo.jpeg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}
