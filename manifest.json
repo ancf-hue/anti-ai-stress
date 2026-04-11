@@ -1,15 +1,17 @@
 {
-  "short_name": "Анти-Стресс",
   "name": "Анти-ИИ Стресс",
+  "short_name": "АнтиСтресс",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1a2a3a",
+  "theme_color": "#1a2a3a",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "logo.jpeg",
-      "sizes": "60x60",
-      "type": "image/jpeg"
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
     }
-  ],
-  "start_url": "./index.html",
-  "display": "standalone",
-  "theme_color": "#0f172a",
-  "background_color": "#0f172a"
+  ]
 }
